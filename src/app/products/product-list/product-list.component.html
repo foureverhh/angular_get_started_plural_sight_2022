@@ -33,7 +33,15 @@
             </thead>
             <tbody>
                 <tr *ngFor="let product of products; let i = index">
-                    <td></td>
+                    <td>
+                      <img
+                      [src]="product.imageUrl"
+                      [title]="product.productName"
+                      [style.width.px]="imageWidth"
+                      [style.heighet.px]="imageHeight"
+                      [style.margin.px]="imageMargin"
+                      >
+                    </td>
                     <td>{{product.productName}}</td>
                     <td>{{product.productCode}}</td>
                     <td>{{product.releaseDate}}</td>
