@@ -37,15 +37,15 @@
                 <tr *ngFor="let product of products; let i = index">
                     <td>
                       <img *ngIf="showImage"
-                      [src]="product.imageUrl"
-                      [title]="product.productName"
-                      [style.width.px]="imageWidth"
-                      [style.heighet.px]="imageHeight"
-                      [style.margin.px]="imageMargin"
-                      >
+                        [src]="product.imageUrl"
+                        [title]="product.productName"
+                        [style.width.px]="imageWidth"
+                        [style.heighet.px]="imageHeight"
+                        [style.margin.px]="imageMargin"
+                        >
                     </td>
                     <td>{{product.productName}}</td>
-                    <td>{{product.productCode | lowercase }}</td>
+                    <td>{{product.productCode | lowercase | convertToSpace: '-' }}</td>
                     <td>{{product.releaseDate}}</td>
                     <td>{{product.price | currency: 'USD' : 'symbol': '1.2-2'}}</td>
                     <td>{{product.starRating}}</td>
