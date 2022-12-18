@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/models/iproduct.model';
+import { ProductServiceService } from '../../services/product-service.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,9 +16,15 @@ export class ProductListComponent implements OnInit {
   // listFilter: string = 'cart';
   private _listFilter: string = '';
   filteredProducts: IProduct[] = [];
+  private _productService: ProductServiceService;
+
+  constructor(productService: ProductServiceService) { 
+    this._productService = productService;
+  }
 
   ngOnInit(): void {
     this.listFilter = 'cart';
+    this.products = this._productService.getProducts();
   }
 
   get listFilter(): string {
@@ -52,7 +59,6 @@ export class ProductListComponent implements OnInit {
       "imageUrl": "assets/images/samsung.png"
     }
   ];
-  constructor() { }
 
   performFilter(value:string): IProduct[] {
     return this.products.filter(p => p.productName.toLowerCase().includes(value.toLowerCase()));
