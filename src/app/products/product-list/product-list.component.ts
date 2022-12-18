@@ -1,30 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/models/iproduct.model';
 import { ProductServiceService } from '../../services/product-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   pageTitle: string = 'Product List';
   imageWidth: number = 50;
   imageHeight: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
+  errorMessage: string = '';
+  subscription!: Subscription;
   // listFilter: string = 'cart';
   private _listFilter: string = '';
+  products: IProduct[] = [];
   filteredProducts: IProduct[] = [];
   private _productService: ProductServiceService;
 
   constructor(productService: ProductServiceService) { 
     this._productService = productService;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.listFilter = 'cart';
-    this.products = this._productService.getProducts();
+    this.listFilter = '';
+    this.subscription = this._productService.getProducts().subscribe({
+      next: products => {
+        this.products = products;
+        this.filteredProducts = this.products;
+      }, 
+      error: error => this.errorMessage = error
+    });
   }
 
   get listFilter(): string {
@@ -36,7 +49,7 @@ export class ProductListComponent implements OnInit {
     console.log("In setter", value);
     this.filteredProducts = this.performFilter(value);
   }
-
+/*
   products: IProduct[] = [
     {
       "productId": 2,
@@ -59,7 +72,7 @@ export class ProductListComponent implements OnInit {
       "imageUrl": "assets/images/samsung.png"
     }
   ];
-
+*/
   performFilter(value:string): IProduct[] {
     return this.products.filter(p => p.productName.toLowerCase().includes(value.toLowerCase()));
   }
