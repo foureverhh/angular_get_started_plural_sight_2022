@@ -8,19 +8,27 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ConvertToSpacePipe } from './pipes/convert-to-space.pipe';
 import { StarComponent } from './shared/star/star.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { WelcomeComponent } from './home/welcome/welcome.component';
+import { RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './home/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
     ConvertToSpacePipe,
-    StarComponent
+    StarComponent,
+    ProductDetailComponent,
+    WelcomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
