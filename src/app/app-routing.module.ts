@@ -1,3 +1,5 @@
+import { ProductDetailGuard } from './products/product-detail.guard';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './products/product-list/product-list.component';
@@ -7,7 +9,9 @@ import { PageNotFoundComponent } from './home/page-not-found/page-not-found.comp
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
-  { path: 'products/:id', component: ProductDetailComponent },
+  { path: 'products/:id', 
+    canActivate: [ ProductDetailGuard ],
+    component: ProductDetailComponent },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
