@@ -9,9 +9,11 @@ import { PageNotFoundComponent } from './home/page-not-found/page-not-found.comp
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
-  { path: 'products/:id', 
+  { 
+    path: 'products/:id', 
     canActivate: [ ProductDetailGuard ],
-    component: ProductDetailComponent },
+    component: ProductDetailComponent 
+  },
   { path: 'welcome', component: WelcomeComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
