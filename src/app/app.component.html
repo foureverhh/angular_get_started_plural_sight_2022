@@ -5,7 +5,40 @@
       <li><a class="nav-link" [routerLink]="['/welcome']">HOME</a></li>
       <li><a class="nav-link" [routerLink]="['/products']">PRODUCT</a></li>
     </ul>
-  </nav>
+  </nav> 
+  <div class="container">
+    <div class="row">
+      <mat-form-field appearance="standard">
+        <mat-label>Filter Table</mat-label>
+        <input matInput placeholder="" search>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <table mat-table matSort>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th> 
+          <td mat-cell>This is the ID</td>
+        </ng-container>
+        <ng-container matColumnDef="userId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>USER ID</th> 
+          <td mat-cell>This is the User ID</td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th> 
+          <td mat-cell>This is Title</td>
+        </ng-container>
+        <ng-container matColumnDef="body">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Body</th>
+          <td mat-cell>This is the Body</td> 
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="posts"></tr>
+        <tr mat-row *matRowDef="let row; columns: posts"></tr>
+      </table>
+    </div>
+  </div>
+ 
+
   <div class="container">
     <router-outlet></router-outlet>   
   </div>

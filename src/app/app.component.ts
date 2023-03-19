@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TableServiceService } from './services/table-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   pageTitle: string  = 'Acme Product Management';
+  posts: string[] = ['id','userId','title','body']
+  constructor(private tableService: TableServiceService) {
+    this.tableService.getData().subscribe(data => {
+      //this.posts = data;
+      console.log("data",data)
+    })
+  }
 }
