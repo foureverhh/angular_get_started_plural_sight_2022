@@ -8,6 +8,7 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './home/page-not-found/page-not-found.component';
 import { ProductModule } from './products/product.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ProductModule } from './products/product.module';
     HttpClientModule,
     RouterModule,
     ProductModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
