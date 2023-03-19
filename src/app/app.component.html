@@ -15,25 +15,25 @@
     </div>
 
     <div class="row">
-      <table mat-table matSort>
+      <table mat-table matSort [dataSource]="dataSource">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th> 
-          <td mat-cell>This is the ID</td>
+          <td mat-cell *matCellDef="let row">{{row.id}}</td>
         </ng-container>
-        <ng-container matColumnDef="userId">
+        <ng-container matColumnDef="userId"> 
           <th mat-header-cell *matHeaderCellDef mat-sort-header>USER ID</th> 
-          <td mat-cell>This is the User ID</td>
+          <td mat-cell *matCellDef="let row">{{row.userId}}</td>
         </ng-container>
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th> 
-          <td mat-cell>This is Title</td>
+          <td mat-cell *matCellDef="let row">{{row.title}}</td>
         </ng-container>
         <ng-container matColumnDef="body">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Body</th>
-          <td mat-cell>This is the Body</td> 
+          <td mat-cell *matCellDef="let row">{{row.body}}</td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="posts"></tr>
-        <tr mat-row *matRowDef="let row; columns: posts"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
   </div>
