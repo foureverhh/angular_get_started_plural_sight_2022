@@ -23,10 +23,24 @@ export class AppComponent {
   dataSource!: MatTableDataSource<UserData>; 
   posts:any;
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(private tableService: TableServiceService) {
     this.tableService.getData().subscribe(data => {
       this.posts = data;
       this.dataSource = new MatTableDataSource(this.posts)
+
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;      
     })
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if(this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

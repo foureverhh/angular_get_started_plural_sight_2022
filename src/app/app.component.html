@@ -10,11 +10,11 @@
     <div class="row">
       <mat-form-field appearance="standard">
         <mat-label>Filter Table</mat-label>
-        <input matInput placeholder="" search>
+        <input matInput placeholder="" search (keyup)="applyFilter($event)" #input>
       </mat-form-field>
     </div>
 
-    <div class="row">
+    <div class="row mat-elevation-z8" >
       <table mat-table matSort [dataSource]="dataSource">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th> 
@@ -34,7 +34,17 @@
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <!--  -->
+        <tr *matNoDataRow>
+          <td class="mat-cell" colspan="4"> The filter does not match any item for text {{input.value}}</td>
+        </tr>
       </table>
+
+      <mat-paginator
+      [pageSizeOptions]="[20]"
+      aria-labels="pageSize"
+      >
+      </mat-paginator>
     </div>
   </div>
  
